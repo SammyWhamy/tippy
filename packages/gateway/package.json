@@ -1,0 +1,29 @@
+{
+    "name": "gateway",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js"
+    },
+    "author": "s.ammy",
+    "license": "MIT",
+    "dependencies": {
+        "@discordjs/brokers": "^0.2.2",
+        "@discordjs/rest": "^2.2.0",
+        "@discordjs/ws": "^1.0.2",
+        "bufferutil": "^4.0.8",
+        "cache": "workspace:*",
+        "core": "workspace:*",
+        "log": "workspace:*",
+        "metrics": "workspace:*",
+        "discord-api-types": "^0.37.83",
+        "ioredis": "^5.4.1",
+        "prom-client": "^15.1.2"
+    },
+    "packageManager": "pnpm@9.0.6+sha256.0624e30eff866cdeb363b15061bdb7fd9425b17bc1bb42c22f5f4efdea21f6b3",
+    "devDependencies": {
+        "@types/node": "^20.12.8"
+    }
+}

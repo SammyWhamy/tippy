@@ -1,0 +1,34 @@
+services:
+  gateway:
+    build:
+      context: .
+      target: gateway
+    restart: unless-stopped
+    depends_on:
+      - cache
+    env_file:
+      - .env
+    ports:
+      - 9090:9090
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  handler:
+    build:
+      context: .
+      target: handler
+    restart: unless-stopped
+    depends_on:
+      - cache
+    deploy:
+      replicas: 4
+    env_file:
+      - .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  cache:
+    container_name: cache
+    image: eqalpha/keydb:alpine
+    restart: unless-stopped
+    volumes:
+      - ./data/cache:/data
+      - ./config/cache/keydb.conf:/etc/keydb/keydb.conf
