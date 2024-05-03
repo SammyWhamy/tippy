@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const envie = z.object({
+export const envSchema = z.object({
     DISCORD_TOKEN: z.string(),
     REDIS_HOST: z.string().default("localhost"),
     REDIS_PORT: z.number().default(6379),
@@ -15,6 +15,6 @@ export const envie = z.object({
     DOCKER_SOCK: z.string().default("/var/run/docker.sock"),
 });
 
-export type Environment = z.infer<typeof envie>;
+export type Environment = z.infer<typeof envSchema>;
 
-export const env: Environment = envie.parse(process.env);
+export const env: Environment = envSchema.parse(process.env);
