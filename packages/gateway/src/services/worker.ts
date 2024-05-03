@@ -3,13 +3,13 @@ import { parentPort, workerData } from "node:worker_threads";
 import { PubSubRedisBroker } from "@discordjs/brokers";
 import { WebSocketShardEvents, WorkerBootstrapper } from "@discordjs/ws";
 import { calculateWorkerId, env } from "core";
+import { getRedis } from "core";
 import { Logger } from "log";
 import { WorkerMetricsClient } from "metrics";
 import { CustomWorkerPayloadOp } from "./manager.js";
-import { redis } from "./redis.js";
 
 const logger = new Logger();
-
+const redis = await getRedis();
 const bootstrapper = new WorkerBootstrapper();
 const broker = new PubSubRedisBroker({ redisClient: redis });
 

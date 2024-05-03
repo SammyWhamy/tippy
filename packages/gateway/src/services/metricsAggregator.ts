@@ -1,6 +1,6 @@
 import { PubSubRedisBroker } from "@discordjs/brokers";
+import { getRedis } from "core";
 import type { HandlerMetricsMessage, MetricsClient } from "metrics";
-import { redis } from "./redis.js";
 
 type EventPayload = {
     data: HandlerMetricsMessage;
@@ -8,6 +8,8 @@ type EventPayload = {
 };
 
 export async function aggregateHandlerMetrics(metricsClient: MetricsClient) {
+    const redis = await getRedis();
+
     const broker = new PubSubRedisBroker({ redisClient: redis });
 
     broker.on("metrics", ({ data, ack }: EventPayload) => {

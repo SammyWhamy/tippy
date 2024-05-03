@@ -1,16 +1,16 @@
 import { Client, GatewayDispatchEvents } from "@discordjs/core";
 import { REST } from "@discordjs/rest";
 import { env } from "core";
+import { getRedis } from "core";
 import { getContainer } from "core/dist/utils.js";
 import { Logger } from "log";
 import { Gateway } from "./Gateway.js";
-import { redis } from "./redis.js";
 
 export const container = await getContainer(env.HOSTNAME);
 export const containerId = Number.parseInt(container.Labels["com.docker.compose.container-number"]);
 
 const logger = new Logger();
-
+const redis = await getRedis();
 const rest = new REST().setToken(env.DISCORD_TOKEN);
 const gateway = new Gateway({ redis, env, handlerId: containerId });
 await gateway.connect();

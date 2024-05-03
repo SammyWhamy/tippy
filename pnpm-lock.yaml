@@ -29,6 +29,10 @@ importers:
         version: 20.12.8
 
   packages/core:
+    dependencies:
+      ioredis:
+        specifier: ^5.4.1
+        version: 5.4.1
     devDependencies:
       '@types/node':
         specifier: ^20.12.8
