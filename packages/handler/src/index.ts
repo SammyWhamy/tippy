@@ -11,6 +11,7 @@ export const containerId = Number.parseInt(container.Labels["com.docker.compose.
 
 const logger = new Logger();
 const redis = await getRedis();
+
 const rest = new REST().setToken(env.DISCORD_TOKEN);
 const gateway = new Gateway({ redis, env, handlerId: containerId });
 await gateway.connect();

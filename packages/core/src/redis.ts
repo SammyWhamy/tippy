@@ -1,16 +1,13 @@
 import { Redis, type RedisOptions } from "ioredis";
 import { env } from "./env.js";
 
-const redisInstances: Redis[] = [];
+const redisInstances: { [key: string]: Redis } = {};
 
 export async function getRedis(options?: RedisOptions): Promise<Redis> {
-    if (options) {
-        for (const instance of redisInstances) {
-            // Hacky deep comparison, and prone to undetected equality due to property order, but should be fine for this use case.
-            if (JSON.stringify(instance.options) === JSON.stringify(options)) {
-                return instance;
-            }
-        }
+    const optionsString = options ? JSON.stringify(options) : "default";
+
+    if (redisInstances[optionsString]) {
+        return redisInstances[optionsString] as Redis;
     }
 
     const redis = new Redis({
@@ -25,7 +22,7 @@ export async function getRedis(options?: RedisOptions): Promise<Redis> {
 
     await redis.connect();
 
-    redisInstances.push(redis);
+    redisInstances[optionsString] = redis;
 
     return redis;
 }

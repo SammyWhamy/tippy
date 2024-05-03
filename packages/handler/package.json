@@ -15,12 +15,12 @@
         "@discordjs/rest": "^2.2.0",
         "core": "workspace:*",
         "log": "workspace:*",
-        "metrics": "workspace:*",
-        "ioredis": "^5.4.1"
+        "metrics": "workspace:*"
     },
     "packageManager": "pnpm@9.0.6+sha256.0624e30eff866cdeb363b15061bdb7fd9425b17bc1bb42c22f5f4efdea21f6b3",
     "devDependencies": {
         "@types/node": "^20.12.8",
-        "discord-api-types": "^0.37.83"
+        "discord-api-types": "^0.37.83",
+        "ioredis": "^5.4.1"
     }
 }
