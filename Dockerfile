@@ -1,9 +1,11 @@
-FROM node:22-alpine AS base
+FROM node:20-alpine AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable
+
+RUN apk add python3 make gcc g++
 
 FROM base AS build
 COPY . /app
