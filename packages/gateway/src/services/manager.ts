@@ -37,6 +37,8 @@ export async function getManager({
     cache,
     metricsClient,
 }: ManagerOptions): Promise<WebSocketManager> {
+    if (manager) return manager;
+
     manager = new WebSocketManager({
         token: env.DISCORD_TOKEN,
         intents:
