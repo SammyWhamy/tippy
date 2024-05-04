@@ -75,9 +75,6 @@ importers:
       prom-client:
         specifier: ^15.1.2
         version: 15.1.2
-      zlib-sync:
-        specifier: ^0.1.9
-        version: 0.1.9
     devDependencies:
       '@types/node':
         specifier: ^20.12.8
@@ -93,7 +90,7 @@ importers:
         version: 0.2.2
       '@discordjs/core':
         specifier: ^1.1.1
-        version: 1.1.1(bufferutil@4.0.8)
+        version: 1.1.1
       '@discordjs/rest':
         specifier: ^2.2.0
         version: 2.2.0
@@ -309,9 +306,6 @@ packages:
   ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
 
-  nan@2.19.0:
-    resolution: {integrity: sha512-nO1xXxfh/RWNxfd/XPfbIfFk5vgLsAxUR9y5O0cHMJu/AW9U95JLXqthYHjEp+8gQ5p96K9jUp8nbVOxCdRbtw==}
-
   node-gyp-build@4.8.1:
     resolution: {integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==}
     hasBin: true
@@ -360,9 +354,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-
-  zlib-sync@0.1.9:
-    resolution: {integrity: sha512-DinB43xCjVwIBDpaIvQqHbmDsnYnSt6HJ/yiB2MZQGTqgPcwBSZqLkimXwK8BvdjQ/MaZysb5uEenImncqvCqQ==}
 
   zod@3.23.6:
     resolution: {integrity: sha512-RTHJlZhsRbuA8Hmp/iNL7jnfc4nZishjsanDAfEY1QpDQZCahUp3xDzl+zfweE9BklxMUcgBgS1b7Lvie/ZVwA==}
@@ -414,7 +405,7 @@ snapshots:
 
   '@discordjs/collection@2.0.0': {}
 
-  '@discordjs/core@1.1.1(bufferutil@4.0.8)':
+  '@discordjs/core@1.1.1':
     dependencies:
       '@discordjs/rest': 2.2.0
       '@discordjs/util': 1.1.0-dev.1714824206-96169add6
@@ -438,13 +429,13 @@ snapshots:
       tslib: 2.6.2
       undici: 5.27.2
 
-  '@discordjs/util@1.1.0-dev.1714824206-96169add6': {}
+  '@discordjs/util@1.0.2': {}
 
   '@discordjs/ws@1.0.2(bufferutil@4.0.8)':
     dependencies:
       '@discordjs/collection': 2.0.0
       '@discordjs/rest': 2.2.0
-      '@discordjs/util': 1.1.0-dev.1714824206-96169add6
+      '@discordjs/util': 1.0.2
       '@sapphire/async-queue': 1.5.2
       '@types/ws': 8.5.10
       '@vladfrangu/async_event_emitter': 2.2.4
@@ -534,8 +525,6 @@ snapshots:
 
   ms@2.1.2: {}
 
-  nan@2.19.0: {}
-
   node-gyp-build@4.8.1: {}
 
   prom-client@15.1.2:
@@ -566,11 +555,7 @@ snapshots:
       '@fastify/busboy': 2.1.1
 
   ws@8.17.0(bufferutil@4.0.8):
-    optionalDependencies:
-      bufferutil: 4.0.8
-
-  zlib-sync@0.1.9:
     dependencies:
-      nan: 2.19.0
+      bufferutil: 4.0.8
 
   zod@3.23.6: {}

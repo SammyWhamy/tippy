@@ -19,8 +19,7 @@
         "log": "workspace:*",
         "metrics": "workspace:*",
         "discord-api-types": "^0.37.83",
-        "prom-client": "^15.1.2",
-        "zlib-sync": "^0.1.9"
+        "prom-client": "^15.1.2"
     },
     "packageManager": "pnpm@9.0.6+sha256.0624e30eff866cdeb363b15061bdb7fd9425b17bc1bb42c22f5f4efdea21f6b3",
     "devDependencies": {
