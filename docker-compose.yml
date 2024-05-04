@@ -30,5 +30,8 @@ services:
     image: eqalpha/keydb:alpine
     restart: unless-stopped
     volumes:
-      - ./data/cache:/data
+      - cache-data:/data
       - ./config/cache/keydb.conf:/etc/keydb/keydb.conf
+
+volumes:
+  cache-data:
