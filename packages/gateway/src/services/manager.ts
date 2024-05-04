@@ -57,7 +57,7 @@ export async function getManager({
         },
         buildStrategy: (manager) => {
             return new WorkerShardingStrategy(manager, {
-                shardsPerWorker: 2,
+                shardsPerWorker: env.SHARDS_PER_WORKER,
                 workerPath: `${import.meta.dirname}/worker.js`,
                 unknownPayloadHandler: async ({ op, data }: CustomWorkerPayload) => {
                     switch (op) {
