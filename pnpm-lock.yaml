@@ -90,7 +90,7 @@ importers:
         version: 0.2.2
       '@discordjs/core':
         specifier: ^1.1.1
-        version: 1.1.1
+        version: 1.1.1(bufferutil@4.0.8)
       '@discordjs/rest':
         specifier: ^2.2.0
         version: 2.2.0
@@ -405,7 +405,7 @@ snapshots:
 
   '@discordjs/collection@2.0.0': {}
 
-  '@discordjs/core@1.1.1':
+  '@discordjs/core@1.1.1(bufferutil@4.0.8)':
     dependencies:
       '@discordjs/rest': 2.2.0
       '@discordjs/util': 1.1.0-dev.1714824206-96169add6
@@ -429,13 +429,13 @@ snapshots:
       tslib: 2.6.2
       undici: 5.27.2
 
-  '@discordjs/util@1.0.2': {}
+  '@discordjs/util@1.1.0-dev.1714824206-96169add6': {}
 
   '@discordjs/ws@1.0.2(bufferutil@4.0.8)':
     dependencies:
       '@discordjs/collection': 2.0.0
       '@discordjs/rest': 2.2.0
-      '@discordjs/util': 1.0.2
+      '@discordjs/util': 1.1.0-dev.1714824206-96169add6
       '@sapphire/async-queue': 1.5.2
       '@types/ws': 8.5.10
       '@vladfrangu/async_event_emitter': 2.2.4
@@ -555,7 +555,7 @@ snapshots:
       '@fastify/busboy': 2.1.1
 
   ws@8.17.0(bufferutil@4.0.8):
-    dependencies:
+    optionalDependencies:
       bufferutil: 4.0.8
 
   zod@3.23.6: {}
