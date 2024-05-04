@@ -30,7 +30,7 @@ export type CustomWorkerPayload = {
 let manager: WebSocketManager;
 const logger = new Logger();
 
-export async function getManager({ env, rest, shardCount, cache }: ManagerOptions): Promise<WebSocketManager> {
+export async function getManager({ env, rest, shardCount, cache, metricsClient }: ManagerOptions): Promise<WebSocketManager> {
     manager = new WebSocketManager({
         token: env.DISCORD_TOKEN,
         intents:
@@ -52,18 +52,20 @@ export async function getManager({ env, rest, shardCount, cache }: ManagerOption
             return new WorkerShardingStrategy(manager, {
                 shardsPerWorker: 2,
                 workerPath: `${import.meta.dirname}/worker.js`,
-                // unknownPayloadHandler: async ({ op, data }: CustomWorkerPayload) => {
-                //     switch (op) {
-                //         case CustomWorkerPayloadOp.Metrics: {
-                //             metricsClient.mergeWorkerMetrics(data);
-                //         }
-                //     }
-                // }
+                unknownPayloadHandler: async ({ op, data }: CustomWorkerPayload) => {
+                    switch (op) {
+                        case CustomWorkerPayloadOp.Metrics: {
+                            metricsClient.mergeWorkerMetrics(data);
+                        }
+                    }
+                }
             });
         },
         retrieveSessionInfo: cache.gateway.getSession.bind(cache.gateway),
         updateSessionInfo: cache.gateway.saveSession.bind(cache.gateway),
     });
+
+    metricsClient.shardCount.set(shardCount);
 
     manager.on(WebSocketShardEvents.Resumed, ({ shardId }) => {
         logger.debugSingle(`Shard ${shardId} resumed.`, "Gateway");
