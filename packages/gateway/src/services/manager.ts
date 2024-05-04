@@ -51,7 +51,7 @@ export async function getManager({
             GatewayIntentBits.MessageContent,
         rest,
         shardCount,
-        buildIdentifyThrottler: async () => {
+        buildIdentifyThrottler: async (manager) => {
             const gatewayInformation = await manager.fetchGatewayInformation();
             return new SimpleIdentifyThrottler(gatewayInformation.session_start_limit.max_concurrency);
         },
