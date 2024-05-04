@@ -30,7 +30,13 @@ export type CustomWorkerPayload = {
 let manager: WebSocketManager;
 const logger = new Logger();
 
-export async function getManager({ env, rest, shardCount, cache, metricsClient }: ManagerOptions): Promise<WebSocketManager> {
+export async function getManager({
+    env,
+    rest,
+    shardCount,
+    cache,
+    metricsClient,
+}: ManagerOptions): Promise<WebSocketManager> {
     manager = new WebSocketManager({
         token: env.DISCORD_TOKEN,
         intents:
@@ -45,8 +51,9 @@ export async function getManager({ env, rest, shardCount, cache, metricsClient }
             GatewayIntentBits.MessageContent,
         rest,
         shardCount,
-        buildIdentifyThrottler: () => {
-            return new SimpleIdentifyThrottler(1);
+        buildIdentifyThrottler: async () => {
+            const gatewayInformation = await manager.fetchGatewayInformation();
+            return new SimpleIdentifyThrottler(gatewayInformation.session_start_limit.max_concurrency);
         },
         buildStrategy: (manager) => {
             return new WorkerShardingStrategy(manager, {
@@ -58,7 +65,7 @@ export async function getManager({ env, rest, shardCount, cache, metricsClient }
                             metricsClient.mergeWorkerMetrics(data);
                         }
                     }
-                }
+                },
             });
         },
         retrieveSessionInfo: cache.gateway.getSession.bind(cache.gateway),
