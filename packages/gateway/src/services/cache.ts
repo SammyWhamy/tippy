@@ -5,16 +5,4 @@ const redis = await getRedis({
     keyPrefix: "gateway:",
 });
 
-void (await getRedis({
-    keyPrefix: "gateway:",
-}));
-
-void (await getRedis({
-    keyPrefix: "gateway:",
-}));
-
-void (await getRedis({
-    keyPrefix: "gateway:",
-}));
-
 export const cache = new Cache(redis);
