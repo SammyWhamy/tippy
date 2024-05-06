@@ -29,6 +29,9 @@ importers:
       '@types/node':
         specifier: ^20.12.8
         version: 20.12.8
+      core:
+        specifier: workspace:*
+        version: link:../core
       ioredis:
         specifier: ^5.4.1
         version: 5.4.1
@@ -214,8 +217,8 @@ packages:
     resolution: {integrity: sha512-nXm9wT8oqrYFRMEqTXQx9DUTeEtXUDMmnUKIhZn6O2EeDY9VCdwj23XCPq7fkqMPKdF7ldAfeVKyxxFdbZl59A==}
     engines: {node: '>=16.11.0'}
 
-  '@discordjs/util@1.1.0-dev.1714824206-96169add6':
-    resolution: {integrity: sha512-gyr1z2lQbM9s9aMtw5Dicl6B87F00GISG08rf991E7oyP3Pmm+VvazEqdCTkokK/7I6XrHH7sea1kwyIX6+cdg==}
+  '@discordjs/util@1.1.1-dev.1714954185-776880d06':
+    resolution: {integrity: sha512-kHdox9HfU5JdH3bIcaPlH0UCga01imw6Obnk6ykjkw7RWcwz7fhNJmnRRDdozbw40+/PvzAoXZSYVgwVDa0s1w==}
     engines: {node: '>=16.11.0'}
 
   '@discordjs/ws@1.0.2':
@@ -455,7 +458,7 @@ snapshots:
   '@discordjs/core@1.1.1(bufferutil@4.0.8)':
     dependencies:
       '@discordjs/rest': 2.2.0
-      '@discordjs/util': 1.1.0-dev.1714824206-96169add6
+      '@discordjs/util': 1.1.1-dev.1714954185-776880d06
       '@discordjs/ws': 1.0.2(bufferutil@4.0.8)
       '@sapphire/snowflake': 3.5.3
       '@vladfrangu/async_event_emitter': 2.2.4
@@ -467,7 +470,7 @@ snapshots:
   '@discordjs/rest@2.2.0':
     dependencies:
       '@discordjs/collection': 2.0.0
-      '@discordjs/util': 1.1.0-dev.1714824206-96169add6
+      '@discordjs/util': 1.1.1-dev.1714954185-776880d06
       '@sapphire/async-queue': 1.5.2
       '@sapphire/snowflake': 3.5.3
       '@vladfrangu/async_event_emitter': 2.2.4
@@ -476,13 +479,13 @@ snapshots:
       tslib: 2.6.2
       undici: 5.27.2
 
-  '@discordjs/util@1.1.0-dev.1714824206-96169add6': {}
+  '@discordjs/util@1.1.1-dev.1714954185-776880d06': {}
 
   '@discordjs/ws@1.0.2(bufferutil@4.0.8)':
     dependencies:
       '@discordjs/collection': 2.0.0
       '@discordjs/rest': 2.2.0
-      '@discordjs/util': 1.1.0-dev.1714824206-96169add6
+      '@discordjs/util': 1.1.1-dev.1714954185-776880d06
       '@sapphire/async-queue': 1.5.2
       '@types/ws': 8.5.10
       '@vladfrangu/async_event_emitter': 2.2.4
@@ -497,7 +500,7 @@ snapshots:
     dependencies:
       '@discordjs/collection': 2.0.0
       '@discordjs/rest': 2.2.0
-      '@discordjs/util': 1.1.0-dev.1714824206-96169add6
+      '@discordjs/util': 1.1.1-dev.1714954185-776880d06
       '@sapphire/async-queue': 1.5.2
       '@types/ws': 8.5.10
       '@vladfrangu/async_event_emitter': 2.2.4

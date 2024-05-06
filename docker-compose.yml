@@ -32,6 +32,93 @@ services:
     volumes:
       - cache-data:/data
       - ./config/cache/keydb.conf:/etc/keydb/keydb.conf
+  redpanda-0:
+    container_name: redpanda-0
+    image: redpandadata/redpanda:latest
+    restart: unless-stopped
+    volumes:
+      - redpanda-0:/var/lib/redpanda/data
+    command:
+      - redpanda
+      - start
+      - --kafka-addr 0.0.0.0:9092
+      - --advertise-kafka-addr redpanda-0:9092
+      - --pandaproxy-addr 0.0.0.0:8082
+      - --advertise-pandaproxy-addr redpanda-0:8082
+      - --schema-registry-addr 0.0.0.0:8081
+      - --rpc-addr redpanda-0:33145
+      - --advertise-rpc-addr redpanda-0:33145
+      - --mode dev-container
+      - --smp 1
+      - --default-log-level=info
+  redpanda-1:
+    container_name: redpanda-1
+    image: redpandadata/redpanda:latest
+    restart: unless-stopped
+    volumes:
+      - redpanda-1:/var/lib/redpanda/data
+    depends_on:
+      - redpanda-0
+    command:
+      - redpanda
+      - start
+      - --kafka-addr 0.0.0.0:9092
+      - --advertise-kafka-addr redpanda-1:9092
+      - --pandaproxy-addr 0.0.0.0:8082
+      - --advertise-pandaproxy-addr redpanda-1:8082
+      - --schema-registry-addr 0.0.0.0:8081
+      - --rpc-addr redpanda-1:33145
+      - --advertise-rpc-addr redpanda-1:33145
+      - --mode dev-container
+      - --smp 1
+      - --default-log-level=info
+      - --seeds redpanda-0:33145
+  redpanda-2:
+    container_name: redpanda-2
+    image: redpandadata/redpanda:latest
+    restart: unless-stopped
+    volumes:
+      - redpanda-2:/var/lib/redpanda/data
+    depends_on:
+      - redpanda-0
+    command:
+      - redpanda
+      - start
+      - --kafka-addr 0.0.0.0:9092
+      - --advertise-kafka-addr redpanda-2:9092
+      - --pandaproxy-addr 0.0.0.0:8082
+      - --advertise-pandaproxy-addr redpanda-2:8082
+      - --schema-registry-addr 0.0.0.0:8081
+      - --rpc-addr redpanda-2:33145
+      - --advertise-rpc-addr redpanda-2:33145
+      - --mode dev-container
+      - --smp 1
+      - --default-log-level=info
+      - --seeds redpanda-0:33145
+  console:
+    container_name: redpanda-console
+    image: redpandadata/console:v2.5.2
+    entrypoint: /bin/sh
+    command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["redpanda-0:9092"]
+          schemaRegistry:
+            enabled: true
+            urls: ["http://redpanda-0:8081"]
+        redpanda:
+          adminApi:
+            enabled: true
+            urls: ["http://redpanda-0:9644"]
+    ports:
+      - 8080:8080
+    depends_on:
+      - redpanda-0
 
 volumes:
   cache-data:
+  redpanda-0:
+  redpanda-1:
+  redpanda-2:

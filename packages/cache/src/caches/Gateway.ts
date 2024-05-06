@@ -2,7 +2,7 @@ import type { SessionInfo } from "@discordjs/ws";
 import type { Redis } from "ioredis";
 
 export class GatewayCache {
-    constructor(private cache: Redis) {}
+    constructor(private redis: Redis) {}
 
     async saveSession(shardId: number, session: SessionInfo): Promise<void> {
         if (!session) {
@@ -10,7 +10,7 @@ export class GatewayCache {
             return;
         }
 
-        await this.cache.hset(
+        await this.redis.hset(
             `shards:${shardId}`,
             "resumeURL",
             session.resumeURL,
@@ -24,7 +24,7 @@ export class GatewayCache {
     }
 
     async getSession(shardId: number): Promise<SessionInfo | null> {
-        const [resumeURL, sequence, sessionId, shardCount] = await this.cache.hmget(
+        const [resumeURL, sequence, sessionId, shardCount] = await this.redis.hmget(
             `shards:${shardId}`,
             "resumeURL",
             "sequence",
@@ -46,6 +46,6 @@ export class GatewayCache {
     }
 
     async clearSession(shardId: number): Promise<void> {
-        await this.cache.del(`shards:${shardId}`);
+        await this.redis.del(`shards:${shardId}`);
     }
 }
